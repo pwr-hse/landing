@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powerhouse Coworking | Coming Soon</title>
+    <style>
+        /* --- Font Definitions --- */
+        @font-face {
+            font-family: 'Founders Grotesk Condensed';
+            src: url('fonts/FoundersGroteskCondensed-Bold.otf') format('otf');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'ABC Oracle';
+            src: url('fonts/ABCOracle-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* --- Base Styles --- */
+        :root {
+            --primary: #00316B;
+            --secondary: #FFD700;
+            --light: #FFFFFF;
+            --dark: #1A1A1A;
+            --spacing: 2rem;
+        }
+
+        body {
+            font-family: 'ABC Oracle', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--light);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Founders Grotesk Condensed', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .coming-soon-tag {
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: var(--primary);
+            color: var(--light);
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Your existing animation styles */
+        #initial-reveal-container {
+            font-family: 'Founders Grotesk Condensed', sans-serif;
+            font-size: 8vw;
+            font-weight: 900;
+            text-transform: uppercase;
+            animation: reveal-from-bottom 1.2s ease-out forwards;
+        }
+
+        @keyframes reveal-from-bottom {
+            from { clip-path: inset(100% 0 0 0); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+
+        .animation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .text-part {
+            font-family: 'Founders Grotesk Condensed', sans-serif;
+            font-size: 8vw;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .middle-container {
+            width: 0;
+            transition: width 0.8s ease-in-out;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .middle-container.expanded {
+            width: 28vw;
+        }
+
+        .phrase {
+            font-family: 'ABC Oracle', sans-serif;
+            position: absolute;
+            font-size: 2.5vw;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            text-align: center;
+            width: 100%;
+            line-height: 1.2;
+        }
+        
+        .phrase.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hero-subtitle {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Main Content Sections --- */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Founders Grotesk Condensed', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Membership Options */
+        .membership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .membership-card {
+            background: var(--light);
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .membership-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .membership-name {
+            font-family: 'Founders Grotesk Condensed', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .membership-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: var(--primary);
+        }
+
+        .membership-features {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .membership-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Form */
+        .form-container {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 3rem;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #e6c200;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                padding: 4rem 1rem;
+            }
+            
+            .text-part, #initial-reveal-container {
+                font-size: 10vw;
+            }
+            
+            .middle-container.expanded {
+                width: 35vw;
+            }
+            
+            .phrase {
+                font-size: 3.5vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">POWERHOUSE</div>
+            <div class="coming-soon-tag">COMING SOON</div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Animation -->
+    <section class="hero">
+        <div id="initial-reveal-container">POWERHOUSE</div>
+        
+        <div class="animation-container" style="display: none;">
+            <div class="text-part" id="power">POWER</div>
+            <div class="middle-container" id="middle">
+                <div class="phrase">Space to<br>Do Good Work</div>
+                <div class="phrase">A New<br>Shared Space</div>
+                <div class="phrase">Where<br>Work Happens</div>
+            </div>
+            <div class="text-part" id="house">HOUSE</div>
+        </div>
+        
+        <p class="hero-subtitle">A premium coworking space coming to [Your City] in [Month Year]</p>
+    </section>
+
+    <!-- Membership Options -->
+    <section id="memberships">
+        <h2 class="section-title">Membership Options</h2>
+        <div class="membership-grid">
+            <div class="membership-card">
+                <h3 class="membership-name">Day Pass</h3>
+                <div class="membership-price">$25/day</div>
+                <ul class="membership-features">
+                    <li>Access 8am-6pm</li>
+                    <li>Hot desk in shared area</li>
+                    <li>High-speed WiFi</li>
+                    <li>Complimentary coffee/tea</li>
+                </ul>
+            </div>
+            
+            <div class="membership-card">
+                <h3 class="membership-name">Part-Time</h3>
+                <div class="membership-price">$150/week</div>
+                <ul class="membership-features">
+                    <li>3 days per week access</li>
+                    <li>Dedicated desk</li>
+                    <li>Meeting room credits</li>
+                    <li>Mail handling</li>
+                </ul>
+            </div>
+            
+            <div class="membership-card">
+                <h3 class="membership-name">Full-Time</h3>
+                <div class="membership-price">$350/month</div>
+                <ul class="membership-features">
+                    <li>24/7 access</li>
+                    <li>Private office options</li>
+                    <li>Unlimited meeting room use</li>
+                    <li>Business address</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title">Our Amenities</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">💻</div>
+                <h3>High-Speed Internet</h3>
+                <p>Fiber optic connections throughout</p>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">☕</div>
+                <h3>Refreshments</h3>
+                <p>Premium coffee, tea, and snacks</p>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">🖨️</div>
+                <h3>Printing</h3>
+                <p>Professional printing services</p>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">📞</div>
+                <h3>Meeting Rooms</h3>
+                <p>Bookable private spaces</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact">
+        <div class="form-container">
+            <h2 class="form-title">Get Early Access</h2>
+            <form id="interest-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="interest">I'm interested in</label>
+                    <select id="interest" name="interest">
+                        <option value="day-pass">Day Pass</option>
+                        <option value="part-time">Part-Time Membership</option>
+                        <option value="full-time">Full-Time Membership</option>
+                        <option value="private-office">Private Office</option>
+                        <option value="events">Event Space</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Questions/Comments</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Join Waitlist</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>POWERHOUSE Coworking &copy; <span id="year"></span> | Coming Soon to [Your City]</p>
+    </footer>
+
+    <!-- Your Existing Animation Script -->
+    <script>
+        // --- DOM Elements ---
+        const initialRevealContainer = document.getElementById('initial-reveal-container');
+        const mainAnimationContainer = document.querySelector('.animation-container');
+        const middleContainer = document.getElementById('middle');
+        const phrases = document.querySelectorAll('.phrase');
+
+        // --- Configuration ---
+        const revealTime = 1200;      // Must match CSS animation duration
+        const pauseAfterReveal = 800;
+        const splitTime = 800;       // Updated to match new CSS transition duration
+        const phraseVisibleTime = 2200;
+        const pauseBetweenLoops = 2000;
+
+        function wait(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function runAnimationCycle() {
+            middleContainer.classList.add('expanded');
+            await wait(splitTime);
+
+            for (const phrase of phrases) {
+                phrase.classList.add('visible');
+                await wait(phraseVisibleTime);
+                phrase.classList.remove('visible');
+                await wait(500);
+            }
+
+            middleContainer.classList.remove('expanded');
+            await wait(splitTime);
+        }
+
+        async function start() {
+            await wait(revealTime + pauseAfterReveal);
+
+            initialRevealContainer.style.display = 'none';
+            mainAnimationContainer.style.display = 'flex';
+
+            await wait(50); 
+
+            while (true) {
+                await runAnimationCycle();
+                await wait(pauseBetweenLoops);
+            }
+        }
+
+        // Start animation
+        start();
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Form submission handler
+        document.getElementById('interest-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically send the form data to your server
+            alert('Thanks for your interest! We\'ll be in touch soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

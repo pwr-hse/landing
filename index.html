@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powerhouse Animation (Final)</title>
+    <style>
+        @font-face {
+            font-family: 'Founders Grotesk Condensed';
+            src: url('fonts/FoundersGroteskCondensed-Bold.otf') format('otf');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'ABC Oracle';
+            src: url('fonts/ABCOracle-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            background-color: #00316B;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            padding: 5vh 5% 0;
+            box-sizing: border-box;
+        }
+
+        #initial-reveal-container {
+            font-family: 'Founders Grotesk Condensed', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            animation: reveal-from-bottom 1.2s ease-out forwards;
+            margin: 0; /* Remove margin-bottom */
+            text-align: center;
+            line-height: 1; /* Add this to match .text-part */
+            height: 1em; /* Add fixed height */
+        }
+
+        @keyframes reveal-from-bottom {
+            from { clip-path: inset(100% 0 0 0); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+
+        .animation-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+            width: 100%;
+            margin: 0; /* Remove vertical margin */
+            height: 1em; /* Match initial container height */
+        }
+
+        .animation-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15vh; /* Move the margin here */
+            min-height: 1em; /* Match other heights */
+        }
+
+        .text-part {
+            font-family: 'Founders Grotesk Condensed', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .middle-container {
+            width: 0;
+            transition: width 1.2s ease-in-out;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 1em;
+        }
+
+        .middle-container.expanded {
+            width: min(32vw, 220px);
+        }
+
+        .phrase {
+            font-family: 'ABC Oracle', sans-serif;
+            position: absolute;
+            font-size: clamp(0.9rem, 2.5vw, 1.5rem);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            text-align: center;
+            width: 100%;
+            padding: 0 1vw;
+            line-height: 1.4;
+        }
+        
+        .phrase.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .bottom-content {
+            position: absolute;
+            bottom: 10%;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .coming-soon-container {
+            font-family: 'ABC Oracle', sans-serif;
+            font-size: clamp(0.9rem, 1.8vw, 1.3rem); /* Slightly smaller */
+            font-weight: 300; /* Lighter weight */
+            letter-spacing: 0.5px;
+            opacity: 0.9; /* Subtle transparency */
+        }
+
+        .address-container {
+            font-family: 'ABC Oracle', sans-serif;
+            font-size: clamp(0.7rem, 1.3vw, 1rem); /* Smaller */
+            line-height: 1.4;
+            opacity: 0.7;
+            margin-top: -0.5rem; /* Tighter spacing */
+        }
+
+        .email-signup {
+            margin-top: 1.5rem; /* Reduced spacing */
+            width: 100%;
+            opacity: 0.95; /* Slight transparency */
+        }
+
+        .email-signup h3 {
+            font-family: 'ABC Oracle', sans-serif;
+            font-size: clamp(0.9rem, 1.3vw, 1.1rem); /* Smaller */
+            font-weight: 300; /* Lighter */
+            margin-bottom: 0.8rem;
+            color: rgba(255,255,255,0.9); /* Soft white */
+        }
+
+        .email-signup form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .email-signup input {
+            padding: 0.8rem;
+            font-family: 'ABC Oracle', sans-serif;
+            font-size: clamp(0.9rem, 1vw, 1rem);
+            border: 1px solid white;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 4px;
+        }
+
+        .email-signup button {
+            padding: 0.8rem;
+            font-family: 'Founders Grotesk Condensed', sans-serif;
+            font-size: clamp(0.9rem, 1vw, 1rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            background: white;
+            color: #00316B;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .email-signup button:hover {
+            background: #00316B;
+            color: white;
+            outline: 1px solid white;
+        }
+
+        .success-message {
+            display: none;
+            font-family: 'ABC Oracle', sans-serif;
+            color: white;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+
+        }
+
+        /* Error state */
+        .success-message.error {
+            color: #ff6b6b;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 10vh;
+            }
+            
+            .animation-container {
+                flex-direction: column;
+                margin: 1vh 0;
+            }
+            
+            .middle-container.expanded {
+                width: 80%;
+                height: 60px;
+                margin: 10px 0;
+            }
+            
+            .bottom-content {
+                bottom: 5%;
+                gap: 0.8rem;
+            }
+            
+            .email-signup {
+                margin-top: 1.5rem;
+            }
+            
+            .email-signup form {
+                gap: 0.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #initial-reveal-container,
+            .text-part {
+                font-size: clamp(2rem, 10vw, 3rem);
+            }
+            
+            .middle-container.expanded {
+                height: 50px;
+            }
+            
+            .phrase {
+                font-size: clamp(0.8rem, 4vw, 1rem);
+            }
+            
+            .bottom-content {
+                width: 95%;
+            }
+        }
+
+        [autocomplete="nope"] {
+            /* Double hide for bots that ignore inline styles */
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="animation-wrapper">
+        <div id="initial-reveal-container">POWERHOUSE</div>
+
+        <div class="animation-container">
+            <div class="text-part" id="power">POWER</div>
+            <div class="middle-container" id="middle">
+                <div class="phrase">A New<br>Shared Space</div>
+                <div class="phrase">Space to<br>Do Good Work</div>
+                <div class="phrase">Where<br>Work Happens</div>
+            </div>
+            <div class="text-part" id="house">HOUSE</div>
+        </div>
+    </div>
+    
+    <div class="bottom-content">
+        <div class="coming-soon-container">Coming soon!</div>
+        <div class="address-container">114 Peterborough St, Christchurch Central City</div>
+        
+        <div class="email-signup">
+            <h3>Register your interest</h3>
+            <form id="signup-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="09926dcf-fdc1-4c36-8509-b375a209ee73">
+                <!-- <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you"> -->
+                
+                <input type="text" name="name" placeholder="Your name" required>
+                <input type="tel" name="phone" placeholder="Phone number" required>
+                <input type="email" name="email" placeholder="Your email address" required>
+
+                <input type="text" name="website" autocomplete="nope" 
+                style="position:absolute;left:-9999px;opacity:0" tabindex="-1">
+                
+                <button type="submit">Notify Me</button>
+            </form>
+            <div class="success-message" style="display:none;">Thank you! We'll be in touch soon.</div>
+        </div>
+        
+    </div>
+
+    <script>
+        // --- DOM Elements ---
+        const initialRevealContainer = document.getElementById('initial-reveal-container');
+        const mainAnimationContainer = document.querySelector('.animation-container');
+        const middleContainer = document.getElementById('middle');
+        const phrases = document.querySelectorAll('.phrase');
+        const signupForm = document.getElementById('signup-form');
+        const successMessage = document.querySelector('.success-message');
+
+        // --- Configuration ---
+        const revealTime = 1200;
+        const pauseAfterReveal = 800;
+        const splitTime = 1200;
+        const phraseVisibleTime = 2200;
+        const pauseBetweenLoops = 2000;
+
+        function wait(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function runAnimationCycle() {
+            middleContainer.classList.add('expanded');
+            await wait(splitTime);
+
+            for (const phrase of phrases) {
+                phrase.classList.add('visible');
+                await wait(phraseVisibleTime);
+                phrase.classList.remove('visible');
+                await wait(500);
+            }
+
+            middleContainer.classList.remove('expanded');
+            await wait(splitTime);
+        }
+
+        async function start() {
+            await wait(revealTime + pauseAfterReveal);
+
+            initialRevealContainer.style.display = 'none';
+            mainAnimationContainer.style.display = 'flex';
+
+            await wait(50); 
+
+            while (true) {
+                await runAnimationCycle();
+                await wait(pauseBetweenLoops);
+            }
+        }
+
+        // Form submission handler
+        let formLoadedTime = Date.now();
+
+        signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitButton = signupForm.querySelector('button');
+        const formInputs = signupForm.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"]');
+        
+        // Visual feedback
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        successMessage.style.display = 'none';
+        successMessage.classList.remove('error');
+
+        if ((Date.now() - formLoadedTime) < 3000) {
+            successMessage.textContent = "Please wait a moment before submitting";
+            successMessage.classList.add('error');
+            successMessage.style.display = 'block';
+            submitButton.disabled = false;
+            submitButton.textContent = 'Notify Me';
+            return;
+        }
+
+        try {
+            const response = await fetch(signupForm.action, {
+                method: 'POST',
+                body: new FormData(signupForm),
+            });
+            
+            const json = await response.json();
+            
+            if (json.success) {
+                // Clear ALL form fields
+                formInputs.forEach(input => {
+                    if (input.type !== 'hidden') input.value = '';
+                });
+                
+                successMessage.textContent = "Thank you! We'll be in touch soon.";
+                successMessage.style.display = 'block';
+            } else {
+                throw new Error(json.message || 'Submission failed');
+            }
+        } catch (error) {
+            successMessage.textContent = 'Error: ' + error.message;
+            successMessage.classList.add('error');
+            successMessage.style.display = 'block';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Notify Me';
+        }
+    });
+
+        // Start animation after ensuring fonts are loaded
+        document.fonts.ready.then(start);
+    </script>
+</body>
+</html>
