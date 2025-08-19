@@ -20,7 +20,8 @@
         }
 
         body {
-            background-color: #304258;
+            /* Gradient from #445C7A to #7da7de */
+            background: linear-gradient(to bottom, #445C7A, #7da7de);
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -164,10 +165,22 @@
             padding: 0.8rem;
             font-family: 'ABC Oracle', sans-serif;
             font-size: clamp(0.9rem, 1vw, 1rem);
-            border: 1px solid white;
-            background: rgba(255,255,255,0.1);
-            color: white;
+            border: 1px solid rgba(0, 0, 0, 0.3); /* Darker border for contrast */
+            background: rgba(255, 255, 255, 0.7); /* Lighter background */
+            color: #304258; /* Dark text for better readability */
             border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .email-signup input::placeholder {
+            color: #5a718a; /* Darker placeholder text */
+        }
+
+        .email-signup input:focus {
+            outline: none;
+            border-color: #304258; /* Darker border on focus */
+            background: rgba(255, 255, 255, 0.9); /* Even lighter background on focus */
+            box-shadow: 0 0 0 2px rgba(48, 66, 88, 0.2); /* Focus indicator */
         }
 
         .email-signup button {
@@ -197,12 +210,13 @@
             font-size: clamp(0.9rem, 1.2vw, 1.1rem);
             margin-top: 1rem;
             transition: all 0.3s ease;
-
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Adding text shadow for better contrast */
         }
 
         /* Error state */
         .success-message.error {
-            color: #ff6b6b;
+            color: #d43f3a;
+            text-shadow: none;
         }
 
         @media (max-width: 768px) {
@@ -251,6 +265,10 @@
             
             .bottom-content {
                 width: 95%;
+            }
+            
+            .email-signup input {
+                padding: 0.7rem;
             }
         }
 
