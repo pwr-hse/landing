@@ -1,427 +1,723 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Powerhouse - Coming Soon!</title>
-    <style>
-        @font-face {
-            font-family: 'Founders Grotesk Condensed';
-            src: url('fonts/FoundersGroteskCondensed-Bold.otf') format('otf');
-            font-weight: 900;
-            font-style: normal;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POWERHOUSE</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden; /* Prevent scrolling on desktop */
+      font-family: Arial, sans-serif;
+      color: white;
+      background: linear-gradient(to bottom, #445C7A, #7da7de);
+    }
 
-        @font-face {
-            font-family: 'ABC Oracle';
-            src: url('fonts/ABCOracle-Regular.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
 
-        body {
-            /* Gradient from #445C7A to #7da7de */
-            background: linear-gradient(to bottom, #445C7A, #7da7de);
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: sans-serif;
-            overflow-x: hidden;
-            position: relative;
-            padding: 5vh 5% 0;
-            box-sizing: border-box;
-        }
+    .container {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      height: 100vh; /* Exactly viewport height */
+      box-sizing: border-box;
+    }
 
-        #initial-reveal-container {
-            font-family: 'Founders Grotesk Condensed', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            animation: reveal-from-bottom 1.2s ease-out forwards;
-            margin: 0; /* Remove margin-bottom */
-            text-align: center;
-            line-height: 1; /* Add this to match .text-part */
-            height: 1em; /* Add fixed height */
-        }
+    .left, .right {
+      padding: 1rem;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
 
-        @keyframes reveal-from-bottom {
-            from { clip-path: inset(100% 0 0 0); }
-            to { clip-path: inset(0 0 0 0); }
-        }
+    .left {
+      width: 56%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
 
-        .animation-container {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            position: relative;
-            width: 100%;
-            margin: 0; /* Remove vertical margin */
-            height: 1em; /* Match initial container height */
-        }
+    .right {
+      width: 44%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+    }
 
-        .animation-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 15vh; /* Move the margin here */
-            min-height: 1em; /* Match other heights */
-        }
+    .right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      flex: 1;
+      max-height: 100%;
+    }
 
-        .text-part {
-            font-family: 'Founders Grotesk Condensed', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1;
-            text-align: center;
-        }
+    .right-top {
+      margin-bottom: 1rem;
+    }
 
-        .middle-container {
-            width: 0;
-            transition: width 1.2s ease-in-out;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 1em;
-        }
+    .right-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-y: auto;
+    }
 
-        .middle-container.expanded {
-            width: min(32vw, 220px);
-        }
+    .right-bottom {
+      margin-top: auto;
+    }
 
-        .phrase {
-            font-family: 'ABC Oracle', sans-serif;
-            position: absolute;
-            font-size: clamp(0.9rem, 2.5vw, 1.5rem);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-            text-align: center;
-            width: 100%;
-            padding: 0 1vw;
-            line-height: 1.4;
-        }
-        
-        .phrase.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .bottom-content {
-            position: absolute;
-            bottom: 10%;
-            width: 90%;
-            max-width: 600px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
+    .right-top h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
 
-        .coming-soon-container {
-            font-family: 'ABC Oracle', sans-serif;
-            font-size: clamp(0.9rem, 1.8vw, 1.3rem); /* Slightly smaller */
-            font-weight: 300; /* Lighter weight */
-            letter-spacing: 0.5px;
-            opacity: 0.9; /* Subtle transparency */
-        }
+    .divider {
+      width: 2px;
+      background: white;
+      flex-shrink: 0;
+      margin: 1rem 0;
+    }
 
-        .address-container {
-            font-family: 'ABC Oracle', sans-serif;
-            font-size: clamp(0.7rem, 1.3vw, 1rem); /* Smaller */
-            line-height: 1.4;
-            opacity: 0.7;
-            margin-top: -0.5rem; /* Tighter spacing */
-        }
+    .loaded .left, .loaded .right {
+      opacity: 1;
+    }
 
-        .email-signup {
-            margin-top: 1.5rem; /* Reduced spacing */
-            width: 100%;
-            opacity: 0.95; /* Slight transparency */
-        }
+    .logo-svg {
+      width: 100%; /* Full width of the .left container */
+      height: auto; /* Let height adjust based on aspect ratio */
+      display: block;
+    }
 
-        .email-signup h3 {
-            font-family: 'ABC Oracle', sans-serif;
-            font-size: clamp(0.9rem, 1.3vw, 1.1rem); /* Smaller */
-            font-weight: 300; /* Lighter */
-            margin-bottom: 0.8rem;
-            color: rgba(255,255,255,0.9); /* Soft white */
-        }
+    .taglines {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 2.5em;
+      overflow: hidden;
+      text-align: center;
+      display: none;
+    }
 
-        .email-signup form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
+    .out .taglines {
+      display: block;
+    }
 
-        .email-signup input {
-            padding: 0.8rem;
-            font-family: 'ABC Oracle', sans-serif;
-            font-size: clamp(0.9rem, 1vw, 1rem);
-            border: 1px solid rgba(0, 0, 0, 0.3); /* Darker border for contrast */
-            background: rgba(255, 255, 255, 0.7); /* Lighter background */
-            color: #304258; /* Dark text for better readability */
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
+    .tagline {
+      font-size: clamp(1rem, 1.5rem, 2rem);
+      letter-spacing: 1px;
+      line-height: 2.5em;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+      text-align: center;
+      width: 100%;
+      padding: 0 1vw;
+    }
 
-        .email-signup input::placeholder {
-            color: #5a718a; /* Darker placeholder text */
-        }
+    .tagline.visible {
+      opacity: 1;
+      visibility: visible;
+    }
 
-        .email-signup input:focus {
-            outline: none;
-            border-color: #304258; /* Darker border on focus */
-            background: rgba(255, 255, 255, 0.9); /* Even lighter background on focus */
-            box-shadow: 0 0 0 2px rgba(48, 66, 88, 0.2); /* Focus indicator */
-        }
+    .icons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      gap: 2rem;
+      /* padding: 1rem 0; */
+    }
 
-        .email-signup button {
-            padding: 0.8rem;
-            font-family: 'Founders Grotesk Condensed', sans-serif;
-            font-size: clamp(0.9rem, 1vw, 1rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            background: white;
-            color: #304258;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    .out .icons {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .email-signup button:hover {
-            background: #304258;
-            color: white;
-            outline: 1px solid white;
-        }
+    .icon {
+      text-align: center;
+      font-size: 0.9rem;
+      flex: 1;
+      max-width: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; /* Align content to top for consistent text positioning */
+      padding: 0 0.5rem;
+    }
 
-        .success-message {
-            display: none;
-            font-family: 'ABC Oracle', sans-serif;
-            color: white;
-            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Adding text shadow for better contrast */
-        }
+    .icon p {
+      margin: 0 0 0.8rem 0; /* Space below text, above icon */
+      order: -1; /* Move text above SVG */
+      width: 100%; /* Ensure text takes full width for consistent alignment */
+    }
 
-        /* Error state */
-        .success-message.error {
-            color: #d43f3a;
-            text-shadow: none;
-        }
+    .icon:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -0.75rem;
+      top: 25%;
+      bottom: 25%;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.3);
+    }
 
-        @media (max-width: 768px) {
-            body {
-                padding-top: 10vh;
-            }
-            
-            .animation-container {
-                flex-direction: column;
-                margin: 1vh 0;
-            }
-            
-            .middle-container.expanded {
-                width: 80%;
-                height: 60px;
-                margin: 10px 0;
-            }
-            
-            .bottom-content {
-                bottom: 5%;
-                gap: 0.8rem;
-            }
-            
-            .email-signup {
-                margin-top: 1.5rem;
-            }
-            
-            .email-signup form {
-                gap: 0.6rem;
-            }
-        }
+    .icon svg {
+      width: 100%;
+      height: auto;
+      max-width: 120px;
+      margin-bottom: 0.8rem;
+      fill: white;
+      transition: transform 0.3s ease;
+    }
 
-        @media (max-width: 480px) {
-            #initial-reveal-container,
-            .text-part {
-                font-size: clamp(2rem, 10vw, 3rem);
-            }
-            
-            .middle-container.expanded {
-                height: 50px;
-            }
-            
-            .phrase {
-                font-size: clamp(0.8rem, 4vw, 1rem);
-            }
-            
-            .bottom-content {
-                width: 95%;
-            }
-            
-            .email-signup input {
-                padding: 0.7rem;
-            }
-        }
+    .icon:hover svg {
+      transform: scale(1.15);
+    }
 
-        [autocomplete="nope"] {
-            /* Double hide for bots that ignore inline styles */
-            display: none !important;
-            visibility: hidden !important;
-        }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
 
-    </style>
+    input {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid white;
+      background: transparent;
+      color: white;
+      transition: border-color 0.3s ease;
+    }
+    .inputs-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    input:focus {
+      border-color: #a3bffa;
+      outline: none;
+    }
+
+    .inputs-row input {
+      flex: 1; /* so both inputs share space evenly */
+      border-radius: 4px; /* small rounded corners */
+
+    }
+
+    .inputs-row input::placeholder {
+      color: #ffffff;
+    }
+
+    button {
+      background: white;
+      color: #0a3d62;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background: #a3bffa;
+      transform: scale(1.05);
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+      align-items: start;
+    }
+
+    .contact-info .left-col {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      row-gap: 0.8rem;
+    }
+
+    .contact-info .right-col {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      row-gap: 0.8rem;
+    }
+
+    .contact-info .row {
+      display: contents;
+    }
+
+    .contact-info .label {
+      font-weight: bold;
+    }
+
+    .contact-info .value {
+      line-height: 1.4;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+    }
+
+    .contact-info p {
+      margin: 0.3rem 0;
+    }
+
+    .form-section {
+      padding-bottom: 0;
+    }
+
+    .form-info {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.5px; /* subtle spacing for emphasis */
+      padding-bottom: 1rem;
+    }
+
+    .success-message {
+      display: none;
+      font-family: Arial, sans-serif;
+      color: white;
+      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .success-message.error {
+      color: #d43f3a;
+      text-shadow: none;
+    }
+
+    [autocomplete="nope"] {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    @media (max-width: 768px) {
+      html, body {
+        height: auto; /* Allow height to grow on mobile */
+        overflow-y: auto; /* Allow vertical scrolling on mobile */
+      }
+
+      .container {
+        flex-direction: column;
+        height: auto; /* Allow container to grow with content */
+      }
+
+      .left, .right {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .left {
+        min-height: 50vh;
+        /* border-right: 0; */
+        /* border-bottom: 2px solid rgba(255,255,255,0.9); */
+      }
+
+      .logo-svg {
+        width: 100%; /* Full width on mobile */
+        height: auto; /* Adjust height based on aspect ratio */
+        max-height: 70%; /* Limit height on mobile */
+      }
+
+      .divider {
+        display: block;
+        height: 2px;
+        width: calc(100% - 2rem); /* Matches logo width with padding accounted for */
+        background: white;
+        margin: 1rem auto; /* Centers divider with vertical spacing */
+      }
+
+      .right-content {
+        gap: 1rem;
+      }
+
+      .right-center {
+        margin: 1rem 0;
+      }
+
+      .icons {
+        flex-wrap: nowrap; /* Keep icons in a single row */
+        justify-content: space-around; /* Distribute space evenly */
+        gap: 1rem; /* Minimum gap between icons */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+        width: calc(100% - 2rem); /* Match container width with padding */
+      }
+
+      .icon {
+        flex: 1; /* Stretch icons to fill available space equally */
+        max-width: none; /* Allow icons to expand fully */
+        font-size: 0.7rem; /* Consistent text size for mobile */
+        padding: 0 0.5rem; /* Maintain padding for spacing */
+        align-items: center; /* Center content horizontally */
+        justify-content: flex-start; /* Align content to top */
+      }
+
+      .icon:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -0.5rem; /* Align divider with gap */
+        top: 25%;
+        bottom: 25%;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .icon:nth-child(2n+1):nth-last-child(n+2)::after,
+      .icon:nth-child(2n+2):nth-last-child(n+1)::after {
+        display: none; /* Remove horizontal dividers */
+      }
+
+      .contact-info {
+        grid-template-columns: 1fr; /* Stack all items vertically on mobile */
+      }
+
+      .contact-info .left-col,
+      .contact-info .right-col {
+        grid-template-columns: 40px 1fr; /* Smaller label column for mobile */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tagline {
+        font-size: clamp(0.8rem, 0.9rem, 1rem);
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .right-top h2 {
+        font-size: 1.6rem; /* Reduce from default ~2rem; adjust as needed */
+      }
+      .contact-info {
+        font-size: 0.9rem; /* Smaller text delays wrapping */
+        gap: 0.8rem; /* Tighten spacing to save height */
+      }
+      .form-info {
+        font-size: 1rem;
+      }
+      .icon {
+        font-size: 0.8rem; /* Keep icon text proportional */
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="animation-wrapper">
-        <div id="initial-reveal-container">POWERHOUSE</div>
-
-        <div class="animation-container">
-            <div class="text-part" id="power">POWER</div>
-            <div class="middle-container" id="middle">
-                <div class="phrase">A New<br>Shared Space</div>
-                <div class="phrase">Space to<br>Do Good Work</div>
-                <div class="phrase">Where<br>Work Happens</div>
-            </div>
-            <div class="text-part" id="house">HOUSE</div>
-        </div>
+  <div class="container">
+    <div class="left" id="left">
+      <svg class="logo-svg"
+        version="1.1"
+        viewBox="0 0 718.67 802.67"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+        overflow="visible">
+        <defs>
+          <clipPath id="clipPath2">
+            <path transform="translate(-39.59 -441.19)" d="m0 527h539v-527h-539z"/>
+          </clipPath>
+          <clipPath id="clipPath4">
+            <path transform="translate(0 -152.93)" d="m0 527h539v-527h-539z"/>
+          </clipPath>
+        </defs>
+        <g id="house">
+          <path transform="matrix(1.3333 0 0 -1.3333 0 648.76)" d="m0 0h33.92v72.67h34.51v-72.67h33.92v168.93h-33.92v-68.91h-34.51v68.91h-33.92zm219.61 73.2v22.52c0 48.27-13.95 75.35-51.15 75.35s-51.42-27.35-51.42-75.35v-22.52c0-48 14.22-75.35 51.42-75.35s51.15 27.08 51.15 75.35m-67.28-15.82v54.17c0 19.57 3.01 32.45 16.14 32.45s16.14-12.87 16.14-32.45v-54.17c0-19.57-3.01-32.44-16.14-32.44s-16.14 12.87-16.14 32.44m133.03-59.79c38.57 0 50.6 23.86 50.6 58.19v113.16h-34.73v-115.3c0-18.5-3.01-28.69-15.86-28.69s-15.59 10.19-15.59 28.69v115.3h-34.74v-113.16c0-34.32 11.76-58.19 50.33-58.19m92.92 60.6h-30.09v-9.65c0-34.06 18.33-50.68 47.59-50.68s47.04 16.89 47.04 47.19c0 26.01-13.67 37.81-33.37 49.34l-15.59 9.65c-8.75 5.36-13.95 10.73-13.95 22.26s4.65 18.23 14.22 18.23c10.67 0 15.86-7.78 15.86-23.33v-9.92h29.81v9.65c0 32.45-15.86 50.14-45.68 50.14-27.62 0-45.4-18.77-45.4-46.93s14.77-39.95 31.45-49.88l14.22-8.85c10.67-6.7 16.96-10.99 16.96-23.06s-4.92-17.97-15.59-17.97c-11.76 0-17.5 8.85-17.5 23.6v10.19zm160.26-58.19v27.35h-48.3v45.32h35.99v27.35h-35.99v41.56h47.75v27.35h-80.85v-168.93h81.39z" clip-path="url(#clipPath4)" fill="#fff"/>
+        </g>
+        <g id="power">
+          <path transform="matrix(1.3333 0 0 -1.3333 52.787 264.41)" d="m0 0h-5.36v56.85h5.36c18.23 0 23.6-8.04 23.6-28.69s-5.36-28.15-23.60-28.15m-5.36-85.28v58.46h8.58c36.74 0 52.56 19.84 52.56 55.24s-15.82 55.24-52.56 55.24h-41.56v-168.93h32.98zm166.25 73.21v22.52c0 48.27-13.67 75.35-50.14 75.35s-50.41-27.35-50.41-75.35v-22.52c0-48 13.94-75.35 50.41-75.35s50.14 27.08 50.14 75.35m-65.96-15.82v54.16c0 19.58 2.95 32.45 15.82 32.45s15.82-12.87 15.82-32.45v-54.16c0-19.58-2.95-32.45-15.82-32.45s-15.82 12.87-15.82 32.45m182.94 111.55-14.19-97.61h-1.05l-14.45 97.61h-24.44l-14.19-97.61h-1.05l-14.45 97.61h-31.01l27.86-168.93h30.48l13.40 94.12h1.05l13.66-94.12h30.48l27.86 168.93zm113.67-168.94v27.35h-46.66v45.32h34.59v27.35h-34.59v41.56h46.12v27.36h-78.57v-168.93h79.1zm71.59 0h32.98c-4.29 8.58-3.75 17.7-5.09 39.15-1.07 20.65-6.17 34.05-24.13 38.08 17.16 2.95 28.69 15.82 28.69 42.37 0 30.03-15.55 49.34-52.02 49.34h-43.17v-168.93h32.71v64.36h6.97c14.75 0 17.97-9.12 19.04-26.55 1.07-21.18 1.61-30.57 4.02-37.81m-24.13 90.63h-5.9v51.48h5.9c17.97 0 23.87-8.85 23.87-25.74 0-19.04-5.9-25.74-23.87-25.74" clip-path="url(#clipPath2)" fill="#fff"/>
+        </g>
+      </svg>
+      <div class="taglines">
+        <div class="tagline">A New Shared Space</div>
+        <div class="tagline">Space to Do Good Work</div>
+        <div class="tagline">Where Work Happens</div>
+      </div>
     </div>
-    
-    <div class="bottom-content">
-        <div class="coming-soon-container">Coming soon!</div>
-        <div class="address-container">114 Peterborough St, Christchurch Central City</div>
-        
-        <div class="email-signup">
-            <h3>Register your interest</h3>
-            <form id="signup-form" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="09926dcf-fdc1-4c36-8509-b375a209ee73">
-                <!-- <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you"> -->
-                
-                <input type="text" name="name" placeholder="Your name" required>
-                <input type="tel" name="phone" placeholder="Phone number" required>
-                <input type="email" name="email" placeholder="Your email address" required>
 
-                <input type="text" name="website" autocomplete="nope" 
-                style="position:absolute;left:-9999px;opacity:0" tabindex="-1">
-                
-                <button type="submit">Notify Me</button>
+    <div class="divider"></div>
+
+    <div class="right">
+      <div class="right-content">
+        <div class="right-top">
+          <h2>
+            Welcome to POWERHOUSE. A place for freelancers, businesses and
+            clients to work, meet and make things happen, together.
+          </h2>
+          <div class="contact-info">
+            <div class="left-col">
+              <div class="row">
+                <span class="label">E</span>
+                <span class="value">info@power-house.co.nz</span>
+              </div>
+              <div class="row">
+                <span class="label">P</span>
+                <span class="value">+64 3 123 4567</span>
+              </div>
+            </div>
+            <div class="right-col">
+              <div class="row">
+                <span class="label">A</span>
+                <span class="value">114 Peterborough Street, Christchurch Central City, Christchurch 8013</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-center">
+          <div class="icons">
+            <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168.26 141.73">
+                <path d="M125.66,86.95v-19.45h-31.55v19.45h-55.02v-19.45H7.54v19.45H0v3.77h7.54v10.62H0v13.17h21.42v16.84l-12.55,3.77,1.09,3.61,11.46-3.45v6.37h3.77v-6.37l11.46,3.45,1.09-3.61-12.55-3.77v-16.84h21.42v-13.17h-7.53v-10.62h55.02v10.62h-7.53v13.17h21.42v16.84l-12.55,3.77,1.09,3.61,11.46-3.45v6.37h3.77v-6.37l11.46,3.45,1.09-3.61-12.55-3.77v-16.84h21.42v-13.17h-7.53v-10.62h42.68v-3.77h-42.68ZM7.54,110.74h-3.76v-5.63h3.76v5.63ZM42.86,105.11v5.63h-3.76v-5.63h3.76ZM35.32,110.74H11.31v-39.47h24.01v39.47ZM94.11,110.74h-3.76v-5.63h3.76v5.63ZM129.42,105.11v5.63h-3.76v-5.63h3.76ZM121.89,110.74h-24.01v-39.47h24.01v39.47Z"/>
+                <path d="M51.71,141.25h29.98v-45.55h-29.98v45.55ZM55.48,137.48v-18.73h22.45v18.73h-22.45ZM55.48,114.98v-5.9h22.45v5.9h-22.45ZM77.92,99.47v5.84h-22.45v-5.84h22.45Z"/>
+                <path d="M138.28,141.25h29.98v-45.55h-29.98v45.55ZM142.04,137.48v-18.73h22.45v18.73h-22.45ZM142.04,114.98v-5.9h22.45v5.9h-22.45ZM164.49,99.47v5.84h-22.45v-5.84h22.45Z"/>
+                <path d="M81.85,26.35h-7.1v-8.87c0-4.44-3.61-8.05-8.05-8.05s-8.05,3.61-8.05,8.05v8.87h-7.1v24.03h30.3v-24.03ZM62.42,17.49c0-2.36,1.92-4.28,4.28-4.28s4.28,1.92,4.28,4.28v8.87h-8.57v-8.87ZM78.08,46.61h-22.76v-16.49h22.76v16.49Z"/>
+                <rect x="64.82" y="35.55" width="3.77" height="5.43"/>
+                <path d="M66.7,62.27c17.15,0,31.1-13.95,31.1-31.10S83.85.07,66.7.07s-31.1,13.95-31.1,31.1,13.95,31.1,31.1,31.1ZM66.7,3.84c15.07,0,27.33,12.26,27.33,27.33s-12.26,27.33-27.33,27.33-27.33-12.26-27.33-27.33S51.63,3.84,66.7,3.84Z"/>
+              </svg>
+              <p>Private Office</p>
+            </div>
+            <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135.55 141.73">
+                <path fill="white" d="M96.56,141.24h29.98v-45.55h-29.98v45.55ZM100.33,137.47v-18.73h22.45v18.73h-22.45ZM100.33,114.97v-5.9h22.45v5.9h-22.45ZM122.77,99.46v5.84h-22.45v-5.84h22.45Z"/>
+                <path fill="white" d="M83.94,67.49h-31.55v19.45H0v54.71h3.77v-50.94h48.62v10.62h-7.53v13.17h21.42v16.84l-12.55,3.77,1.09,3.61,11.46-3.45v6.37h3.77v-6.37l11.46,3.45,1.09-3.61-12.55-3.77v-16.84h21.42v-13.17h-7.53v-10.62h47.67v50.94h3.77v-54.71h-51.44v-19.45ZM52.39,110.73h-3.76v-5.63h3.76v5.63ZM87.71,105.1v5.63h-3.76v-5.63h3.76ZM80.17,110.73h-24.01v-39.47h24.01v39.47Z"/>
+                <polygon fill="white" points="92.98 26.34 92.98 .08 89.21 .08 89.21 26.34 47.13 26.34 47.13 .08 43.36 .08 43.36 26.34 0 26.34 0 30.11 135.55 30.11 135.55 26.34 92.98 26.34"/>
+              </svg>
+              <p>Desk</p>
+            </div>
+            <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168.33 141.73">
+                <polygon fill="white" points="151.94 26.28 109.37 26.28 109.37 .02 105.6 .02 105.6 26.28 63.52 26.28 63.52 .02 59.75 .02 59.75 26.28 16.39 26.28 16.39 30.05 151.94 30.05 151.94 26.28"/>
+                <path fill="white" d="M65.7,86.88v-6.74h-4.57v-19.27h-31.04v19.27h-4.57v6.74H0v3.77h168.33v-3.77h-102.64ZM33.85,64.64h23.50v15.50h-23.50v-15.50ZM29.28,83.91h32.65v2.97H29.28v-2.97Z"/>
+                <path fill="white" d="M29.59,101.27l-2.79,40.19,3.76.26.48-6.95h29.13l.48,6.95,3.76-.26-2.79-40.19H29.59ZM58.10,105.04l1.07,15.45h-27.14l1.07-15.45h25ZM31.30,131l.47-6.74h27.67l.47,6.74h-28.60Z"/>
+                <path fill="white" d="M106.72,101.27l-2.79,40.19,3.76.26.48-6.95h29.13l.48,6.95,3.76-.26-2.79-40.19h-32.03ZM135.23,105.04l1.07,15.45h-27.14l1.07-15.45h25ZM108.43,131l.47-6.74h27.67l.47,6.74h-28.60Z"/>
+              </svg>
+              <p>Casual</p>
+            </div>
+            <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156.65 141.73">
+                <path fill="white" d="M118.73,61.41h-9.7v24.26h3.77v-8.15h5.93c4.44,0,8.05-3.61,8.05-8.05s-3.61-8.05-8.05-8.05ZM118.73,73.74h-5.93v-8.57h5.93c2.36,0,4.28,1.92,4.28,4.28s-1.92,4.28-4.28,4.28Z"/>
+                <path fill="white" d="M116.57,50.05c-13.47,0-24.43,10.96-24.43,24.43s10.96,24.43,24.43,24.43,24.43-10.96,24.43-24.43-10.96-24.43-24.43-24.43ZM116.57,95.14c-11.39,0-20.66-9.27-20.66-20.66s9.27-20.66,20.66-20.66,20.66,9.27,20.66,20.66-9.27,20.66-20.66,20.66Z"/>
+                <polygon fill="white" points="80.14 0 76.5 0 0 0 0 141.73 3.77 141.73 3.77 3.77 76.37 3.77 76.37 141.73 76.5 141.73 80.14 141.73 80.27 141.73 80.27 3.77 152.88 3.77 152.88 141.73 156.65 141.73 156.65 0 80.14 0"/>
+                <rect fill="white" x="87.1" y="12.35" width="58.04" height="3.77"/>
+                <rect fill="white" x="10.72" y="12.35" width="58.04" height="3.77"/>
+                <path fill="white" d="M64.79,49.88v-29.97H14.7v32.17h-7.41v10.33h7.41v73.65h50.09V62.4h7.41v-10.33h-7.41v-2.19ZM24.95,110.68h29.59l4.47,5.63H20.48l4.47-5.63ZM25.92,106.91v-40.72h27.64v40.72h-27.64ZM54.38,62.42h-29.27l-5.21-8.76h39.69l-5.21,8.76ZM18.47,23.68h42.55v26.21H18.47v-26.21ZM11.06,58.64v-2.79h3.64v2.79h-3.64ZM18.47,58.62l3.69,6.2v43.32l-3.69,4.65v-54.16ZM61.02,132.29H18.47v-12.21h42.55v12.21ZM61.02,112.79l-3.69-4.65v-43.32l3.69-6.2v54.16ZM68.43,55.85v2.79h-3.64v-2.79h3.64Z"/>
+              </svg>
+              <p>Car Parking</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-bottom">
+          <div class="form-section">
+            <p class="form-info">
+              For more information and to stay up to date, register your interest.
+            </p>
+            <form id="signup-form" action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value="09926dcf-fdc1-4c36-8509-b375a209ee73">
+              <input type="text" name="website" autocomplete="nope" style="position:absolute;left:-9999px;opacity:0" tabindex="-1">
+              <div class="inputs-row">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+              </div>
+              <button type="submit">Submit</button>
             </form>
             <div class="success-message" style="display:none;">Thank you! We'll be in touch soon.</div>
+          </div>
         </div>
-        
+      </div>
     </div>
+  </div>
 
-    <script>
-        // --- DOM Elements ---
-        const initialRevealContainer = document.getElementById('initial-reveal-container');
-        const mainAnimationContainer = document.querySelector('.animation-container');
-        const middleContainer = document.getElementById('middle');
-        const phrases = document.querySelectorAll('.phrase');
-        const signupForm = document.getElementById('signup-form');
-        const successMessage = document.querySelector('.success-message');
+  <script>
+    (function () {
+      const leftCol = document.getElementById("left");
+      const body = document.body;
+      const svg = document.querySelector(".logo-svg");
+      const power = svg.querySelector("#power");
+      const house = svg.querySelector("#house");
+      const taglinesContainer = document.querySelector(".taglines");
+      const taglines = document.querySelectorAll(".tagline");
 
-        // --- Configuration ---
-        const revealTime = 1200;
-        const pauseAfterReveal = 800;
-        const splitTime = 1200;
-        const phraseVisibleTime = 2200;
-        const pauseBetweenLoops = 2000;
+      // Store original transforms
+      const originalPower = power.getAttribute('transform') || '';
+      const originalHouse = house.getAttribute('transform') || '';
 
-        function wait(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+      // Define cubic-bezier easing function
+      function cubicBezier(x1, y1, x2, y2) {
+        return function (t) {
+          return 3 * t * (1 - t) ** 2 * y1 + 3 * t ** 2 * (1 - t) * y2 + t ** 3;
+        };
+      }
+      const ease = cubicBezier(0.22, 1, 0.36, 1);
+
+      function computeDeltaUser() {
+        // Reset transforms to original
+        power.setAttribute('transform', originalPower);
+        house.setAttribute('transform', originalHouse);
+
+        const leftRect = leftCol.getBoundingClientRect();
+        const powerRect = power.getBoundingClientRect();
+        const houseRect = house.getBoundingClientRect();
+
+        // Get SVG's coordinate transformation matrix
+        const ctm = svg.getScreenCTM();
+        const scaleY = ctm.d; // Vertical scaling factor
+
+        // Add buffer to prevent text from touching edges
+        const buffer = 20;
+
+        // Calculate pixel distances to move
+        const dyPowerPx = leftRect.top + buffer - powerRect.top;
+        const dyHousePx = leftRect.bottom - buffer - houseRect.bottom;
+
+        // Convert pixel distances to SVG user units
+        const deltaPowerUser = dyPowerPx / scaleY;
+        const deltaHouseUser = dyHousePx / scaleY;
+
+        return { deltaPowerUser, deltaHouseUser };
+      }
+
+      function animateGroup(group, originalTransform, startDelta, endDelta, duration, delay = 0) {
+        const startTime = performance.now();
+        function step(timestamp) {
+          const elapsed = Math.max(timestamp - startTime - delay, 0);
+          const progress = Math.min(elapsed / duration, 1);
+          const easedProgress = ease(progress);
+          const currentDelta = startDelta + (endDelta - startDelta) * easedProgress;
+          group.setAttribute('transform', `translate(0, ${currentDelta}) ${originalTransform}`.trim());
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
         }
+        requestAnimationFrame(step);
+      }
 
-        async function runAnimationCycle() {
-            middleContainer.classList.add('expanded');
-            await wait(splitTime);
-
-            for (const phrase of phrases) {
-                phrase.classList.add('visible');
-                await wait(phraseVisibleTime);
-                phrase.classList.remove('visible');
-                await wait(500);
-            }
-
-            middleContainer.classList.remove('expanded');
-            await wait(splitTime);
+      function pinOnResize() {
+        if (leftCol.classList.contains('out')) {
+          const { deltaPowerUser, deltaHouseUser } = computeDeltaUser();
+          power.setAttribute('transform', `translate(0, ${deltaPowerUser}) ${originalPower}`.trim());
+          house.setAttribute('transform', `translate(0, ${deltaHouseUser}) ${originalHouse}`.trim());
+        } else {
+          power.setAttribute('transform', originalPower);
+          house.setAttribute('transform', originalHouse);
         }
+      }
 
-        async function start() {
-            await wait(revealTime + pauseAfterReveal);
+      // Tagline animation logic from the provided code
+      const phraseVisibleTime = 2200;
+      const pauseBetweenPhrases = 500;
+      const pauseBetweenLoops = 2000;
 
-            initialRevealContainer.style.display = 'none';
-            mainAnimationContainer.style.display = 'flex';
+      function wait(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
 
-            await wait(50); 
-
-            while (true) {
-                await runAnimationCycle();
-                await wait(pauseBetweenLoops);
-            }
+      async function runTaglineAnimation() {
+        for (const tagline of taglines) {
+          tagline.classList.add('visible');
+          await wait(phraseVisibleTime);
+          tagline.classList.remove('visible');
+          await wait(pauseBetweenPhrases);
         }
+      }
 
-        // Form submission handler
-        let formLoadedTime = Date.now();
+      async function runCycle() {
+        setTimeout(() => {
+          const { deltaPowerUser, deltaHouseUser } = computeDeltaUser();
+          leftCol.classList.add("out");
+          taglinesContainer.style.display = 'block';
+          animateGroup(power, originalPower, 0, deltaPowerUser, 1200, 0);
+          animateGroup(house, originalHouse, 0, deltaHouseUser, 1200, 0);
+          runTaglineAnimation().then(() => {
+            leftCol.classList.remove("out");
+            taglinesContainer.style.display = 'none';
+            animateGroup(power, originalPower, deltaPowerUser, 0, 1200, 0);
+            animateGroup(house, originalHouse, deltaHouseUser, 0, 1200, 0);
+          });
+        }, 3000);
+      }
 
-        signupForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitButton = signupForm.querySelector('button');
-        const formInputs = signupForm.querySelectorAll('input[type="text"], input[type="tel"], input[type="email"]');
-        
-        // Visual feedback
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
-        successMessage.style.display = 'none';
-        successMessage.classList.remove('error');
+      // Initial page load
+      window.addEventListener('load', () => {
+        body.classList.add('loaded');
+        runCycle();
+        setInterval(runCycle, 10800); // Total cycle: 3s (wait) + 7.8s (3 phrases * 2.2s + 2 * 0.5s + 1.2s return) = 10.8s
+      });
 
-        if ((Date.now() - formLoadedTime) < 3000) {
-            successMessage.textContent = "Please wait a moment before submitting";
-            successMessage.classList.add('error');
-            successMessage.style.display = 'block';
-            submitButton.disabled = false;
-            submitButton.textContent = 'Notify Me';
-            return;
+      // Update on resize
+      window.addEventListener('resize', pinOnResize);
+    })();
+
+    // Form submission handler
+    const signupForm = document.getElementById('signup-form');
+    const successMessage = document.querySelector('.success-message');
+    let formLoadedTime = Date.now();
+
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitButton = signupForm.querySelector('button');
+      const formInputs = signupForm.querySelectorAll('input[type="text"], input[type="email"]');
+
+      // Visual feedback
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      successMessage.style.display = 'none';
+      successMessage.classList.remove('error');
+
+      if ((Date.now() - formLoadedTime) < 3000) {
+        successMessage.textContent = "Please wait a moment before submitting";
+        successMessage.classList.add('error');
+        successMessage.style.display = 'block';
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit';
+        return;
+      }
+
+      try {
+        const response = await fetch(signupForm.action, {
+          method: 'POST',
+          body: new FormData(signupForm),
+        });
+
+        const json = await response.json();
+
+        if (json.success) {
+          // Clear form fields
+          formInputs.forEach(input => {
+            if (input.type !== 'hidden') input.value = '';
+          });
+
+          successMessage.textContent = "Thank you! We'll be in touch soon.";
+          successMessage.style.display = 'block';
+        } else {
+          throw new Error(json.message || 'Submission failed');
         }
-
-        try {
-            const response = await fetch(signupForm.action, {
-                method: 'POST',
-                body: new FormData(signupForm),
-            });
-            
-            const json = await response.json();
-            
-            if (json.success) {
-                // Clear ALL form fields
-                formInputs.forEach(input => {
-                    if (input.type !== 'hidden') input.value = '';
-                });
-                
-                successMessage.textContent = "Thank you! We'll be in touch soon.";
-                successMessage.style.display = 'block';
-            } else {
-                throw new Error(json.message || 'Submission failed');
-            }
-        } catch (error) {
-            successMessage.textContent = 'Error: ' + error.message;
-            successMessage.classList.add('error');
-            successMessage.style.display = 'block';
-        } finally {
-            submitButton.disabled = false;
-            submitButton.textContent = 'Notify Me';
-        }
+      } catch (error) {
+        successMessage.textContent = 'Error: ' + error.message;
+        successMessage.classList.add('error');
+        successMessage.style.display = 'block';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit';
+      }
     });
-
-        // Start animation after ensuring fonts are loaded
-        document.fonts.ready.then(start);
-    </script>
+  </script>
 </body>
 </html>
